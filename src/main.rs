@@ -179,7 +179,7 @@ fn read_lid_angle(device: IOHIDDeviceRef) -> Option<f32> {
         
         // The lid angle is typically a 16-bit value at a specific offset
         // Based on reverse engineering, it's often at offset 1-2
-        if report_length >= 2 {
+        if report_length >= 3 {
             let raw_value = u16::from_le_bytes([report[1], report[2]]);
             // The value is in units of 0.01 degrees
             let angle = raw_value as f32 / 100.0;
