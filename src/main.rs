@@ -6,6 +6,7 @@ use core_foundation::number::CFNumber;
 use core_foundation::set::CFSet;
 use core_foundation::string::CFString;
 use core_foundation_sys::base::{CFIndex, CFTypeRef, kCFAllocatorDefault};
+use std::io::Write;
 use std::os::raw::{c_void, c_int};
 use std::thread;
 use std::time::Duration;
@@ -142,7 +143,7 @@ fn find_lid_angle_device() -> Option<IOHIDDeviceRef> {
             return None;
         }
         
-        // Get the first device
+        // Get the first device (safe because we checked len() > 0 above)
         let device = *devices_set.get_values().first().unwrap() as IOHIDDeviceRef;
         
         // Open the device
@@ -233,7 +234,8 @@ fn main() {
                 
                 if should_print {
                     // Create a visual bar representation
-                    let bar_length = (angle / 180.0 * 50.0) as usize;
+                    // Clamp bar_length to prevent overflow if angle > 180
+                    let bar_length = ((angle / 180.0 * 50.0) as usize).min(50);
                     let bar = "█".repeat(bar_length);
                     
                     print!("\r");
@@ -243,8 +245,8 @@ fn main() {
                         " ".repeat(50 - bar_length)
                     );
                     
-                    use std::io::Write;
-                    std::io::stdout().flush().unwrap();
+                    // Ignore flush errors (e.g., if stdout is closed)
+                    let _ = std::io::stdout().flush();
                     
                     last_angle = Some(angle);
                 }
