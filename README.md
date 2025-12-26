@@ -94,7 +94,7 @@ If you see this error:
 
 1. **Check device compatibility**: Run the diagnostic command:
    ```bash
-   hidutil list --matching '{"VendorID":0x5ac,"ProductID":0x8104,"PrimaryUsagePage":32,"PrimaryUsage":138}'
+   hidutil list --matching '{"VendorID":0x05AC,"ProductID":0x8104,"PrimaryUsagePage":32,"PrimaryUsage":138}'
    ```
    If this returns no devices, your MacBook may not have the sensor.
 

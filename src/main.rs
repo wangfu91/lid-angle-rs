@@ -143,8 +143,16 @@ fn find_lid_angle_device() -> Option<IOHIDDeviceRef> {
             return None;
         }
         
-        // Get the first device (safe because we checked len() > 0 above)
-        let device = *devices_set.get_values().first().unwrap() as IOHIDDeviceRef;
+        // Get the first device (we checked len() > 0 above, so unwrap is safe)
+        let device_values = devices_set.get_values();
+        let device = match device_values.first() {
+            Some(&dev) => dev as IOHIDDeviceRef,
+            None => {
+                eprintln!("Failed to access device from set");
+                CFRelease(manager as CFTypeRef);
+                return None;
+            }
+        };
         
         // Open the device
         let open_result = IOHIDDeviceOpen(device, IOHIDOptionsType::None);
