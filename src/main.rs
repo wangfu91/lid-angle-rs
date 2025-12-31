@@ -57,7 +57,7 @@ enum IOHIDOptionsType {
 // External IOKit HID functions
 #[cfg(target_os = "macos")]
 #[link(name = "IOKit", kind = "framework")]
-extern "C" {
+unsafe extern "C" {
     fn IOHIDManagerCreate(allocator: CFTypeRef, options: IOHIDOptionsType) -> IOHIDManagerRef;
 
     fn IOHIDManagerSetDeviceMatching(manager: IOHIDManagerRef, matching: CFDictionaryRef);
