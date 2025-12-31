@@ -192,12 +192,8 @@ fn find_lid_angle_device() -> Option<HidDevice> {
                 );
                 if fallback_result == 0 && report_length >= 3 {
                     chosen_report_id = Some(LID_ANGLE_REPORT_ID_FALLBACK);
-                } else {
-                    eprintln!(
-                        "Device {} failed to read report (primary res {}, len {}; fallback res {}, len {})",
-                        idx, primary_result, report_length, fallback_result, report_length
-                    );
                 }
+                // Don't print error - it's expected that some matching devices won't support the report
             }
 
             if let Some(id) = chosen_report_id {
@@ -213,6 +209,8 @@ fn find_lid_angle_device() -> Option<HidDevice> {
                 });
             }
 
+            // Silently skip devices that don't support the report IDs
+            // (common during discovery - matching HID criteria doesn't guarantee lid angle support)
             IOHIDDeviceClose(device, IOHIDOptionsType::None);
         }
 
