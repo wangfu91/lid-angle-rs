@@ -18,8 +18,8 @@ This tool uses the IOKit HID framework to access the MacBook's built-in lid angl
 - **macOS 11.0+** (Big Sur or later)
 - **Compatible MacBook**: 
   - MacBook Pro 16-inch (2019) or newer
-  - MacBook Pro 14-inch/16-inch (M1/M2/M3/M4)
-  - MacBook Air (M1/M2/M3)
+  - MacBook Pro (~~M1~~/M2/M3/M4)
+  - MacBook Air (~~M1~~/M2/M3/M4)
   - Note: Not all models have this sensor; compatibility varies
 
 ## Installation
