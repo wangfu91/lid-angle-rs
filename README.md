@@ -1,6 +1,6 @@
 # lid-angle-rs
 
-A Rust command-line tool to display real-time MacBook lid angle using the hidden lid angle sensor.
+A Rust command-line tool to read and display your MacBook's hidden lid angle sensor in real-time.
 
 ## Overview
 
@@ -24,34 +24,30 @@ This tool uses the IOKit HID framework to access the MacBook's built-in lid angl
 
 ## Installation
 
-### From Source
+### From crates.io
 
 ```bash
-# Clone the repository
-git clone https://github.com/wangfu91/lid-angle-rs.git
-cd lid-angle-rs
-
-# Build the project
-cargo build --release
-
-# Run the tool
-cargo run --release
+cargo install lid-angle
 ```
 
-The compiled binary will be available at `target/release/lid-angle`.
+### From source
+
+```bash
+git clone https://github.com/wangfu91/lid-angle-rs.git
+cd lid-angle-rs
+cargo build --release
+```
+
+The compiled binary will be available at `target/release/lid-angle` (or run with `cargo run --release` during development).
 
 ## Usage
 
 Simply run the tool:
 
-```bash
-cargo run --release
-```
-
-Or if you've installed the binary:
+Install once, then run:
 
 ```bash
-./target/release/lid-angle
+lid-angle
 ```
 
 The tool will:
@@ -100,17 +96,17 @@ If you see this error:
 
 2. **Try with elevated privileges**:
    ```bash
-   sudo cargo run --release
+   sudo lid-angle
    ```
 
 3. **Verify your MacBook model**: The sensor is typically available on MacBook Pro models from 2019 onwards.
 
-### Permission Issues
+### Permission issues
 
-If you encounter permission errors, you may need to run the tool with `sudo`:
+If you encounter permission errors, run the tool with `sudo`:
 
 ```bash
-sudo ./target/release/lid-angle
+sudo lid-angle
 ```
 
 ## Credits

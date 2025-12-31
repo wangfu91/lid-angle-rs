@@ -1,17 +1,27 @@
 [package]
-name = "lid-angle-rs"
+name = "lid-angle"
 version = "0.1.0"
 edition = "2021"
-authors = ["wangfu91"]
-description = "A Rust CLI tool to display real-time MacBook lid angle"
+authors = ["wangfu91 <wangfu91@hotmail.com>"]
+description = "A Rust CLI tool to read and display real-time MacBook lid angle"
 license = "MIT"
+repository = "https://github.com/wangfu91/lid-angle-rs"
+homepage = "https://github.com/wangfu91/lid-angle-rs"
+documentation = "https://github.com/wangfu91/lid-angle-rs#readme"
+readme = "README.md"
+keywords = ["macos", "macbook", "lid-angle", "hid", "iokit"]
+categories = ["command-line-utilities", "hardware-support"]
 
 [[bin]]
 name = "lid-angle"
 path = "src/main.rs"
 
 [dependencies]
-core-foundation = "0.9"
+[target.'cfg(target_os = "macos")'.dependencies]
+core-foundation = "0.10"
 core-foundation-sys = "0.8"
 
-[target.'cfg(target_os = "macos")'.dependencies]
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
