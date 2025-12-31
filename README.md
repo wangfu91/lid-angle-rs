@@ -1,5 +1,8 @@
 # lid-angle-rs
 
+[![Crates.io](https://img.shields.io/crates/v/lid-angle.svg)](https://crates.io/crates/lid-angle)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Rust command-line tool to read and display your MacBook's hidden lid angle sensor in real-time.
 
 ## Overview
